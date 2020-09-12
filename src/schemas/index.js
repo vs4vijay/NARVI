@@ -3,5 +3,5 @@
 const UserSchemas = require('./user.schema');
 
 module.exports = {
-    UserSchemas
-}
+  UserSchemas,
+};

@@ -1,7 +1,7 @@
 'use strict';
 
-const logger = require("pino")();
-const Joi = require("@hapi/joi");
+const logger = require('pino')();
+const Joi = require('@hapi/joi');
 
 const validator = (schema) => {
   return (req, res, next) => {

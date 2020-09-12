@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const Joi = require("@hapi/joi");
+const Joi = require('@hapi/joi');
 
 const createSchema = Joi.object().keys({
   name: Joi.string().required(),
@@ -9,12 +9,12 @@ const createSchema = Joi.object().keys({
 });
 
 const updateSchema = Joi.object().keys({
-    name: Joi.string().required(),
-    email: Joi.string().email(),
-    phone: Joi.string(),
-  });
+  name: Joi.string().required(),
+  email: Joi.string().email(),
+  phone: Joi.string(),
+});
 
 module.exports = {
   createSchema,
-  updateSchema
+  updateSchema,
 };

@@ -9,7 +9,7 @@ const config = {
   TIMESTAMP: new Date().toTimeString(),
 
   // DB related configuration
-  MONGODB_URI: process.env.MONGODB_URI || 'mongodb://root:root@localhost/test?authSource=admin&w=1'
+  MONGODB_URI: process.env.MONGODB_URI || 'mongodb://root:root@localhost/test?authSource=admin&w=1',
 };
 
 module.exports = config;
