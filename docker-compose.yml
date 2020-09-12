@@ -1,0 +1,22 @@
+version: '3.7'
+
+volumes:
+  mongodb_data: {}
+
+services:
+  microservice:
+    build: .
+    ports:
+      - '9000:9000'
+    environment:
+      MONGODB_URI: mongodb://root:root@mongodb/test?authSource=admin&w=1
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
