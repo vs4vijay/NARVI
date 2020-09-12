@@ -30,7 +30,7 @@ yarn add
 
 - Make sure to create `.env` file from `.env.example` and fill values accordingly
 
-### Run Without Docker
+### Run without Docker
 
 ```shell
 # For Local Development
@@ -43,7 +43,7 @@ pm2 start src/app.js
 node src/app.js
 ```
 
-### Run Using Docker
+### Run using Docker
 
 ```shell
 # Build Image
@@ -53,7 +53,7 @@ docker build -t nodejs-microservice .
 docker run -it -p 9000:9000 --env-file .env nodejs-microservice
 ```
 
-### Run Using Docker Compose
+### Run using Docker Compose
 
 ```shell
 # Using Docker Compose
@@ -87,7 +87,7 @@ kubectl delete -f ./kubernetes/deploy-node-app.yml
 | GET | /api/v1/users | Get All Users |
 | POST | /api/v1/users | Create a User |
 | GET | /api/v1/users/\<id\> | Get User By Id |
-| PUT | /api/v1/users/\<id\> | Update User |
+| PUT | /api/v1/users/\<id\> | Update a User |
 | DELETE | /api/v1/users/\<id\> | Delete a User |
 
 ---
