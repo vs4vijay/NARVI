@@ -30,8 +30,9 @@ class UsersController {
     let foundUser;
 
     try {
-      foundUser = await userService.get(req.params.id);
+      foundUser = await userService.get(req.params.id).select('name email phone created_at updated_at');
     } catch (error) {
+      logger.error(error);
       return res.status(404).json({ errors: [ 'user not found' ] });
     }
 
@@ -43,7 +44,7 @@ class UsersController {
 
   static async getAll(req, res, next) {
     const response = {
-      data: await userService.getAll(),
+      data: await userService.getAll().select('name email phone created_at updated_at'),
     };
     res.json(response);
   }
@@ -54,6 +55,7 @@ class UsersController {
     try {
       updatedUser = await userService.update(req.params.id, req.body);
     } catch (error) {
+      logger.error(error);
       return res.status(404).json({ errors: [ 'user not found' ] });
     }
 
@@ -64,15 +66,15 @@ class UsersController {
   }
 
   static async delete(req, res, next) {
-    logger.info(req.body);
 
     try {
       await userService.delete(req.params.id);
     } catch (error) {
+      logger.error(error);
       return res.status(404).json({ errors: [ 'user not found' ] });
     }
 
-    res.status(204);
+    res.status(204).json({});
   }
 }
 
