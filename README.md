@@ -67,7 +67,10 @@ docker-compose down
 
 - Make sure kubernetes cluster is setup already (use Minikube, Kind, k3s, or MicroK8S)
 - This deploys the node application only, DB should be hosted somewhere else. Update the env variables from file (`./kubernetes/deploy-node-app.yml`)
-- Using Minikube: run $(minikube docker-env) then build docker image
+- Using Minikube: Run following
+  - `$(minikube docker-env)`
+  - `minikube start --insecure-registry`
+  - `docker build -t nodejs-microservice .`
 
 ```shell
 # Deploy to Kubernetes Cluster
