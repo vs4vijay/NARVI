@@ -6,6 +6,8 @@ const logger = require('pino')();
 
 const config = require('./config');
 const { db } = require('./db');
+const { UserSchemas } = require('./schemas');
+const { validator } = require('./middlewares');
 const { HealthCheckController, UsersController } = require('./controllers');
 
 const app = express();
@@ -25,8 +27,8 @@ app.get(`${config['BASE_PATH']}/healthz`, HealthCheckController.healthCheck);
 const usersRouter = express.Router();
 usersRouter.get('/', UsersController.getAll);
 usersRouter.get('/:id', UsersController.get);
-usersRouter.post('/', UsersController.create);
-usersRouter.put('/:id', UsersController.update);
+usersRouter.post('/', validator(UserSchemas.createSchema), UsersController.create);
+usersRouter.put('/:id', validator(UserSchemas.updateSchema), UsersController.update);
 usersRouter.delete('/:id', UsersController.delete);
 app.use(`${config['BASE_PATH']}/users`, usersRouter);
 
