@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-microservice
+  template:
+    metadata:
+      labels:
+        app: nodejs-microservice
+    spec:
+      containers:
+        - name: nodejs-microservice
+          image: nodejs-microservice
+          ports:
+            - containerPort: 9000
+          # envFrom:
+          # - secretRef:
+          #     name: nodejs-microservice-secret
+          env:
+            - name: NODE_ENV
+              value: development
+            - name: MONGODB_URI
+              value: mongodb://root:root@mongodb-host/test?authSource=admin&w=1
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-microservice
+  labels:
+    app: nodejs-microservice
+spec:
+  selector:
+    app: nodejs-microservice
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
+---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: nodejs-microservice-secret
+# type: Opaque
+# data:
+#   NODE_ENV: development
+#   MONGODB_URI: "mongodb://root:root@mongodb-host/test?authSource=admin&w=1"
+# ---

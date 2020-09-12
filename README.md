@@ -28,18 +28,53 @@ yarn add
 
 ## Running
 
+- Make sure to create `.env` file from `.env.example` and fill values accordingly
+
+### Run Without Docker
+
 ```shell
 # For Local Development
 npm run dev
-
-# Using Docker Compose
-docker-compose up
 
 # On Production, Use pm2 or docker container
 pm2 start src/app.js
 
 # OR
 node src/app.js
+```
+
+### Run Using Docker
+
+```shell
+# Build Image
+docker build -t nodejs-microservice .
+
+# Run Container
+docker run -it -p 9000:9000 --env-file .env nodejs-microservice
+```
+
+### Run Using Docker Compose
+
+```shell
+# Using Docker Compose
+docker-compose up
+
+# Stop Docker Compose
+docker-compose down
+```
+
+### Run on Kubernetes
+
+- Make sure kubernetes cluster is setup already (use Minikube, Kind, k3s, or MicroK8S)
+- This deploys the node application only, DB should be hosted somewhere else. Update the env variables from file (`./kubernetes/deploy-node-app.yml`)
+- Using Minikube: run $(minikube docker-env) then build docker image
+
+```shell
+# Deploy to Kubernetes Cluster
+kubectl apply -f ./kubernetes/deploy-node-app.yml
+
+# Remove from Kubernetes Cluster
+kubectl delete -f ./kubernetes/deploy-node-app.yml
 ```
 
 ---
