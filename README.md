@@ -95,6 +95,26 @@ kubectl delete -f ./kubernetes/deploy-node-app.yml
 
 ---
 
+## PR Gate Process
+
+To ensure the quality and integrity of the codebase, all pull requests must pass through a PR gate before being merged. This process involves automated checks that are run via GitHub Actions as defined in the `.github/workflows/pr-gate.yml` file.
+
+### Running Tests Locally
+
+Before submitting a pull request, you can run tests locally to ensure your changes pass all checks:
+
+```shell
+npm test
+```
+
+This command will run all unit tests in the project, ensuring that your changes do not break any existing functionality.
+
+### GitHub Actions Workflow
+
+The GitHub Actions workflow for the PR gate includes steps for linting with ESLint, running unit tests, and building the Docker image. This workflow is triggered automatically upon the creation of a pull request to the main branch. A pull request can only be merged once all checks have passed successfully.
+
+---
+
 ## Features
 
 - Follows RESTful API Patterns
