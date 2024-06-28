@@ -1,9 +1,9 @@
-name: PR Gate Workflow
+name: PR Gate
 
 on:
   pull_request:
     branches:
-      - main
+      - develop
 
 jobs:
   build:
