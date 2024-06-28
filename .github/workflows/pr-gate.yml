@@ -1,0 +1,24 @@
+name: PR Gate
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Run linting
+        run: npm run lint
+      - name: Run tests
+        run: npm test
+      - name: Build Docker image
+        run: docker build -t nodejs-microservice .
