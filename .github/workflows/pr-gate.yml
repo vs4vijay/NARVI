@@ -6,7 +6,7 @@ on:
       - develop
 
 jobs:
-  build:
+  pr-gate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,4 +21,4 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Build Docker image
-        run: docker build -t nodejs-microservice .
+        run: docker build -t NARVI .
